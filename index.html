@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TechX 2019 Capstone Hackathon</title>
+    <style>
+        @font-face {
+            font-family: NesobriteEx-Bold;
+            src: url(./font.ttf);
+        }
+
+        .frame {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            overflow: hidden;
+            background: black;
+        }
+
+        .bg {
+            display: none;
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .bg-mobile {
+            display: none;
+            position: absolute;
+            height: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .widget {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+        }
+
+        #countdown {
+            color: white;
+            font-size: 95px;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: NesobriteEx-Bold;
+            width: auto;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .bg-mobile {
+                display: block;
+            }
+
+            .widget {
+                width: 180%;
+            }
+
+            #countdown {
+                font-size: 20px;
+            }
+        }
+
+        @media only screen and (min-width: 601px) {
+            .bg {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="frame">
+        <img src="pc.png" class="bg">
+        <img src="mobile.png" class="bg-mobile">
+        <img src="center.png" class="widget">
+        <div id="countdown">READY?</div>
+    </div>
+
+    <script>
+        function pad(n, width, z) {
+            z = z || '0';
+            n = n + '';
+            return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+        }
+
+        // Set the date we're counting down to
+        var startCountDownDate = new Date("July 29, 2019 21:00:00").getTime();
+        var countDownDate = new Date("July 30, 2019 21:00:00").getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function () {
+
+            if (new Date().getTime() >= startCountDownDate) {
+                // Get today's date and time
+                var now = new Date().getTime();
+
+                // Find the distance between now and the count down date
+                var distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the result in the element with id="demo"
+                document.getElementById("countdown").innerText = pad(hours, 2) + " : " + pad(minutes, 2) + " : " + pad(seconds, 2);
+                // If the count down is finished, write some text 
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("countdown").innerHTML = "TIME UP";
+                }
+            }
+        }, 1000);
+    </script>
+
+</body>
+
+</html>
